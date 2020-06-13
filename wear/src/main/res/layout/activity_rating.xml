@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.hcilab.circog_watch.AlertnessSurveyActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="@dimen/box_vertical_padding">
+
+            <TextView
+                android:id="@+id/tv_radio_header"
+                style="@style/activity_header_style"
+                android:text="@string/task_survey_sleepiness" />
+
+            <RadioGroup
+                android:id="@+id/alertness_radiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkedButton="@id/alterness_radio1"
+                android:paddingStart="@dimen/list_start_padding"
+                android:paddingEnd="@dimen/list_end_padding">
+
+                <RadioButton
+                    android:id="@+id/alterness_radio1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingStart="10dp"
+                    android:text="1 - super sleepy" />
+
+                <RadioButton
+                    android:id="@+id/alterness_radio2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingStart="10dp"
+                    android:text="2" />
+
+                <RadioButton
+                    android:id="@+id/alterness_radio3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingStart="10dp"
+                    android:text="3" />
+
+                <RadioButton
+                    android:id="@+id/alterness_radio4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingStart="10dp"
+                    android:text="4" />
+
+                <RadioButton
+                    android:id="@+id/alterness_radio5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingStart="10dp"
+                    android:text="5 - super alert" />
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        style="@style/button_list_item"
+        android:layout_marginTop="0dp"
+        android:onClick="onConfirmSelectionClick"
+        android:visibility="gone"
+        android:id="@+id/btnConfirm"
+        android:text="@string/confirm" />
+</LinearLayout>

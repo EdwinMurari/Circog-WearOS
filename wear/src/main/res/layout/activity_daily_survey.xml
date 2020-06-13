@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.hcilab.circog_watch.DailySurveyActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:animateLayoutChanges="true"
+        android:paddingTop="@dimen/box_vertical_padding">
+
+        <TextView
+            style="@style/activity_header_style"
+            android:text="@string/daily_survey_title" />
+
+        <TextView
+            style="@style/clickable_textview"
+            android:onClick="launchWakeupTimePicker"
+            android:text="@string/daily_survey_statement_1" />
+
+        <TextView
+            style="@style/clickable_textview"
+            android:onClick="launchHoursSleptPicker"
+            android:text="@string/daily_survey_statement_2" />
+
+        <TextView
+            style="@style/clickable_textview"
+            android:onClick="launchSleepQualityPicker"
+            android:text="@string/daily_survey_sleep_quality" />
+
+        <TextView
+            android:id="@+id/tv_error_message"
+            android:visibility="gone"
+            style="@style/textview_warning_list_item"/>
+
+        <Button
+            style="@style/button_list_item"
+            android:onClick="onSubmitDailySurveyClick"
+            android:text="@string/survey_send"/>
+    </LinearLayout>
+
+</ScrollView>

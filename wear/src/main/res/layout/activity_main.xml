@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_grey"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/header_end_padding"
+    android:gravity="center_vertical"
+    tools:context="org.hcilab.circog_watch.MainActivity"
+    tools:deviceIds="wear">
+
+    <Button
+        android:id="@+id/btn_pvt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onLogCoffeeClick"
+        android:text="Log coffee" />
+
+    <Button
+        android:id="@+id/btn_mot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onStartTestClick"
+        android:text="Take test" />
+
+</LinearLayout>
