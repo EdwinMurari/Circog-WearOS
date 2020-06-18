@@ -38,6 +38,8 @@ public class ConsentActivity extends Activity {
             Log.i(TAG, "onGiveConsent()");
         }
 
+        Util.putBool(this, CircogPrefs.PREF_CONSENT_GIVEN, true);
+
         sendConsentResultToWearApp(true);
         startNextActivity();
     }
