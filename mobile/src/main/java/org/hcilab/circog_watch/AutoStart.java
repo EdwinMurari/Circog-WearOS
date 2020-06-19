@@ -18,7 +18,7 @@ public class AutoStart extends BroadcastReceiver {
             // Start the notification trigger service
             if(Util.getBool(context, CircogPrefs.PREF_CONSENT_GIVEN, false)) {
                 Intent intentNotificationTriggerService = new Intent(context, NotificationTriggerService.class);
-                context.startService(intentNotificationTriggerService);
+                context.startForegroundService(intentNotificationTriggerService);
             }
         } else {
             Log.i(TAG, "restarting of Circog NotificationScheduler aborted -- no consent yet");

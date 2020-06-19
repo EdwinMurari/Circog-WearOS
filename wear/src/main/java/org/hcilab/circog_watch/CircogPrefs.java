@@ -3,7 +3,7 @@ package org.hcilab.circog_watch;
 public interface CircogPrefs {
 
     // MAIN
-    boolean DEBUG_MODE  = true;
+    boolean DEBUG_MODE  = false;
     boolean PROVIDE_FEEDBACK = false;
     int MAX_DAILY_TASKS = 6;
     int MIN_STUDY_DAYS = 8;

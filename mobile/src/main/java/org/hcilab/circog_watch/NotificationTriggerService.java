@@ -1,6 +1,7 @@
 package org.hcilab.circog_watch;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -9,6 +10,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +27,8 @@ public class NotificationTriggerService extends Service implements CircogPrefs {
     private static final boolean MAKE_NOISE = true;
     public static final String NOTIFICATION_TAG = "TASK";
     public static final int NOTIFICATION_ID = 0;
+    private static final String CHANNEL_ID = "CIRCOG_NOTIFICATION_CHANNEL";
+    private static final String CHANNEL_NAME = "CIRCOF_CHANNEL_NAME";
 
     private static NotificationTriggerService instance;
     private Timer showNotifTimer;
@@ -90,7 +96,7 @@ public class NotificationTriggerService extends Service implements CircogPrefs {
     public void onDestroy() {
 
         super.onDestroy();
-        startService(new Intent(this, NotificationTriggerService.class));
+        startForegroundService(new Intent(this, NotificationTriggerService.class));
 
     }
 
@@ -265,15 +271,17 @@ public class NotificationTriggerService extends Service implements CircogPrefs {
 
         notificationIsShown = false;
 
-        // Build notification
-        Notification.Builder builder = new Notification.Builder(getApplicationContext())
-//                .setContentIntent(pendingIntentMain)
-                .setSmallIcon(R.drawable.circog_notificon)
-                .setContentTitle(getApplicationContext().getString(R.string.notif_title))
-                .setContentText(getApplicationContext().getString(R.string.notif_content))
-                .setAutoCancel(false)
-                .setOnlyAlertOnce(true)
-                .setPriority(Notification.PRIORITY_HIGH);
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+        NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance);
+
+        NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.circog_notificon)
+                        .setContentTitle(getApplicationContext().getString(R.string.notif_title))
+                        .setContentText(getApplicationContext().getString(R.string.notif_content))
+                        .setChannelId(CHANNEL_ID)
+                        .setAutoCancel(false)
+                        .setOnlyAlertOnce(true);
 
         // Intent to open the MainActivity
         Intent intentMain = new Intent(getApplicationContext(), MainActivity.class);
@@ -289,16 +297,17 @@ public class NotificationTriggerService extends Service implements CircogPrefs {
                         0,
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
-        builder.setContentIntent(resultPendingIntent);
+        notificationBuilder.setContentIntent(resultPendingIntent);
 
         // Sound/vibrate?
         if (MAKE_NOISE) {
-            builder.setDefaults(Notification.DEFAULT_ALL);
+            notificationBuilder.setDefaults(Notification.DEFAULT_ALL);
         }
 
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+        mNotificationManager.createNotificationChannel(mChannel);
+        mNotificationManager.notify(NOTIFICATION_ID , notificationBuilder.build());
     }
 
     public boolean isMinTimeElapsed() {
